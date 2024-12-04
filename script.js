@@ -1,3 +1,4 @@
+// Event listener for image upload
 document.getElementById('imageInput').addEventListener('change', function(event) {
     const file = event.target.files[0];
     if (file) {
@@ -11,36 +12,48 @@ document.getElementById('imageInput').addEventListener('change', function(event)
     }
 });
 
-document.getElementById('downloadBtn').addEventListener('click', function() {
-    const uploadedImage = document.getElementById('uploadedImage');
-    const photoFrame = document.getElementById('photoFrame');
+// Function to combine image and frame
+function combineImageWithFrame() {
+    const frame = document.getElementById('photoFrame');
+    const image = document.getElementById('uploadedImage');
 
-    if (uploadedImage.src) {
-        // Create a canvas to draw the image and frame
+    if (image.src) {
+        // Create a canvas to combine the frame and image
         const canvas = document.createElement('canvas');
         const ctx = canvas.getContext('2d');
+        
+        // Set canvas size to match frame size
+        canvas.width = frame.width;
+        canvas.height = frame.height;
 
-        // Set canvas dimensions to the size of the frame
-        const width = photoFrame.width;   // Width of the frame
-        const height = photoFrame.height; // Height of the frame
-        canvas.width = width;
-        canvas.height = height;
+        // Draw the uploaded image onto the canvas
+        ctx.drawImage(image, 0, 0, frame.width, frame.height);
 
-        // First, draw the frame on the canvas
-        ctx.drawImage(photoFrame, 0, 0, width, height);
+        // Draw the photo frame onto the canvas
+        const frameImg = new Image();
+        frameImg.src = frame.src;
+        frameImg.onload = function() {
+            ctx.drawImage(frameImg, 0, 0, frame.width, frame.height);
 
-        // Then, draw the uploaded image on top of the frame
-        ctx.drawImage(uploadedImage, 0, 0, width, height);
+            // Create a download link for the combined image
+            const combinedImage = canvas.toDataURL('image/png');
 
-        // Create a data URL of the canvas image
-        const imageData = canvas.toDataURL('image/png');
-
-        // Create a download link
-        const link = document.createElement('a');
-        link.href = imageData;
-        link.download = 'downloaded_image_with_frame.png';
-        link.click();
+            // Set the link to the canvas image for download
+            const link = document.getElementById('downloadBtn');
+            link.href = combinedImage;
+            link.download = 'downloaded_image_with_frame.png';
+            link.style.display = 'block';
+        };
     } else {
+        alert('Please upload an image first.');
+    }
+}
+
+// Event listener for download button
+document.getElementById('downloadBtn').addEventListener('click', function(event) {
+    // Only proceed if there's an image to download
+    if (!document.getElementById('uploadedImage').src) {
+        event.preventDefault();
         alert('No image to download');
     }
 });
