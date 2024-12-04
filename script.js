@@ -3,36 +3,29 @@ document.getElementById('imageInput').addEventListener('change', function(event)
     if (file) {
         const reader = new FileReader();
         reader.onload = function(e) {
-            const uploadedImage = new Image();
+            const uploadedImage = document.getElementById('uploadedImage');
             uploadedImage.src = e.target.result;
-            uploadedImage.onload = function() {
-                const canvas = document.getElementById('canvas');
-                const ctx = canvas.getContext('2d');
-                
-                // Gambar frame
-                const photoFrame = new Image();
-                photoFrame.src = 'photo_frame.png';
-                photoFrame.onload = function() {
-                    // Lukis frame dan gambar
-                    ctx.clearRect(0, 0, canvas.width, canvas.height);
-                    ctx.drawImage(photoFrame, 0, 0, canvas.width, canvas.height);  // Gambar frame
-                    ctx.drawImage(uploadedImage, 50, 50, 200, 300);  // Gambar yang dimuat naik
-                    
-                    // Butang download kini aktif
-                    document.getElementById('downloadBtn').disabled = false;
-                };
-            };
+            uploadedImage.style.display = 'block';  // Show the uploaded image
         };
         reader.readAsDataURL(file);
     }
 });
 
-// Fungsi untuk muat turun gambar
 document.getElementById('downloadBtn').addEventListener('click', function() {
-    const canvas = document.getElementById('canvas');
-    const imageUrl = canvas.toDataURL('image/png');
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+
+    const frame = document.getElementById('photoFrame');
+    const uploadedImage = document.getElementById('uploadedImage');
+
+    canvas.width = frame.width;
+    canvas.height = frame.height;
+
+    ctx.drawImage(frame, 0, 0, frame.width, frame.height); // Draw frame
+    ctx.drawImage(uploadedImage, 0, 0, uploadedImage.width, uploadedImage.height); // Draw uploaded image
+
     const link = document.createElement('a');
-    link.href = imageUrl;
-    link.download = 'combined_image.png';
+    link.href = canvas.toDataURL('image/png');
+    link.download = 'downloaded_image.png';
     link.click();
 });
