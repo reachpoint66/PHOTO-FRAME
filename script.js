@@ -16,24 +16,29 @@ document.getElementById('downloadBtn').addEventListener('click', function() {
     const photoFrame = document.getElementById('photoFrame');
 
     if (uploadedImage.src) {
-        // Create a canvas to combine the images
+        // Create a canvas to draw the image and frame
         const canvas = document.createElement('canvas');
         const ctx = canvas.getContext('2d');
-        
-        // Set the canvas size to match the frame size
-        canvas.width = photoFrame.width;
-        canvas.height = photoFrame.height;
 
-        // Draw the photo frame
-        ctx.drawImage(photoFrame, 0, 0, canvas.width, canvas.height);
+        // Set canvas dimensions
+        const width = photoFrame.width;   // Width of the frame
+        const height = photoFrame.height; // Height of the frame
+        canvas.width = width;
+        canvas.height = height;
 
-        // Draw the uploaded image on top of the frame
-        ctx.drawImage(uploadedImage, 0, 0, canvas.width, canvas.height);
+        // Draw the frame
+        ctx.drawImage(photoFrame, 0, 0, width, height);
 
-        // Create a downloadable link
+        // Draw the uploaded image
+        ctx.drawImage(uploadedImage, 0, 0, width, height);
+
+        // Create an image from the canvas
+        const imageData = canvas.toDataURL('image/png');
+
+        // Create a download link
         const link = document.createElement('a');
-        link.href = canvas.toDataURL('image/png');  // Get the image from canvas
-        link.download = 'combined_image.png';
+        link.href = imageData;
+        link.download = 'downloaded_image_with_frame.png';
         link.click();
     } else {
         alert('No image to download');
