@@ -46,3 +46,14 @@ body {
     border-radius: 5px;
     margin-top: 20px;
 }
+
+#photo-frame {
+    position: absolute;
+    z-index: 1; /* Memberi kedudukan di belakang elemen lain */
+}
+
+#uploadBtn {
+    position: relative;
+    z-index: 10; /* Butang upload akan berada di atas photo frame */
+}
+
