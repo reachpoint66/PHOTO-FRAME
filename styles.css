@@ -57,3 +57,30 @@ body {
     z-index: 10; /* Butang upload akan berada di atas photo frame */
 }
 
+/* Letakkan photo frame di tengah */
+#photo-frame {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1; /* Pastikan ia berada di belakang butang upload */
+}
+
+/* Butang upload */
+#uploadBtn {
+    position: relative;
+    z-index: 10; /* Pastikan ia berada di atas photo frame */
+}
+
+#photo-frame {
+    width: 300px;  /* Saiz yang sesuai */
+    height: 300px;
+    object-fit: cover;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
+
+
