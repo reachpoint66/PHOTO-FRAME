@@ -20,19 +20,19 @@ document.getElementById('downloadBtn').addEventListener('click', function() {
         const canvas = document.createElement('canvas');
         const ctx = canvas.getContext('2d');
 
-        // Set canvas dimensions
+        // Set canvas dimensions to the size of the frame
         const width = photoFrame.width;   // Width of the frame
         const height = photoFrame.height; // Height of the frame
         canvas.width = width;
         canvas.height = height;
 
-        // Draw the frame
+        // First, draw the frame on the canvas
         ctx.drawImage(photoFrame, 0, 0, width, height);
 
-        // Draw the uploaded image
+        // Then, draw the uploaded image on top of the frame
         ctx.drawImage(uploadedImage, 0, 0, width, height);
 
-        // Create an image from the canvas
+        // Create a data URL of the canvas image
         const imageData = canvas.toDataURL('image/png');
 
         // Create a download link
