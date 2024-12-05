@@ -37,3 +37,6 @@ Pictures/
 Saved Games/
 Videos/
 
+git add .gitignore
+git commit -m "Add .gitignore to ignore unrelated files"
+git push origin master
