@@ -7,16 +7,17 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h2>Upload your image and download with frame</h2>
 
-    <div class="frame-container">
-        <img id="frame" src="photo_frame.png" alt="photo frame" class="frame">
-        <canvas id="canvas" style="display: none;"></canvas>
-        <img id="uploadedImage" src="" alt="Uploaded Image" class="uploaded-image">
+    <div class="container">
+        <!-- Photo frame displayed here -->
+        <div id="frame-container">
+            <img id="frame" src="photo_frame.png" alt="Photo Frame" style="display: none;">
+            <canvas id="photoCanvas" style="border: 1px solid #000;"></canvas>
+        </div>
+
+        <input type="file" id="uploadBtn" accept="image/*">
+        <button id="downloadBtn" style="display: none;">Download Image</button>
     </div>
-
-    <input type="file" id="uploadImage" accept="image/*">
-    <button id="downloadBtn">Download Image</button>
 
     <script src="script.js"></script>
 </body>
