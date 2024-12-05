@@ -66,4 +66,12 @@ body {
 .download-btn:hover {
     background-color: #007B9A;
 }
+
+#uploadedImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;  /* Menyesuaikan gambar dengan bingkai tanpa mengubah nisbah aspek */
+    display: none;  /* Tunjukkan gambar hanya selepas dimuat naik */
+}
+
 8c5d62c (Inisialisasi repositori dengan fail sedia ada)

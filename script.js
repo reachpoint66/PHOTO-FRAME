@@ -1,16 +1,3 @@
-document.getElementById('imageInput').addEventListener('change', function(event) {
-    const file = event.target.files[0];
-    if (file) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            const uploadedImage = document.getElementById('uploadedImage');
-            uploadedImage.src = e.target.result;
-            uploadedImage.style.display = 'block';  // Show the uploaded image
-        };
-        reader.readAsDataURL(file);
-    }
-});
-
 document.getElementById('downloadBtn').addEventListener('click', function() {
     const image = document.getElementById('uploadedImage');
     const photoFrame = document.getElementById('photoFrame');
@@ -24,17 +11,22 @@ document.getElementById('downloadBtn').addEventListener('click', function() {
         canvas.width = photoFrame.width;
         canvas.height = photoFrame.height;
 
-        // Draw the frame (make sure the frame image is loaded)
-        ctx.drawImage(photoFrame, 0, 0, canvas.width, canvas.height);
+        // Make sure the frame image is loaded before drawing it
+        const frameImage = new Image();
+        frameImage.src = photoFrame.src;
+        frameImage.onload = function() {
+            // Draw the frame first
+            ctx.drawImage(frameImage, 0, 0, canvas.width, canvas.height);
 
-        // Draw the uploaded image on top of the frame
-        ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+            // Draw the uploaded image on top of the frame, resize if necessary
+            ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
 
-        // Create a downloadable link
-        const link = document.createElement('a');
-        link.href = canvas.toDataURL('image/png');
-        link.download = 'downloaded_image_with_frame.png';
-        link.click();
+            // Create a downloadable link
+            const link = document.createElement('a');
+            link.href = canvas.toDataURL('image/png');
+            link.download = 'downloaded_image_with_frame.png';
+            link.click();
+        };
     } else {
         alert('No image to download');
     }
