@@ -40,3 +40,4 @@ Videos/
 git add .gitignore
 git commit -m "Add .gitignore to ignore unrelated files"
 git push origin master
+8c5d62c (Inisialisasi repositori dengan fail sedia ada)
