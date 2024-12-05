@@ -74,4 +74,9 @@ body {
     display: none;  /* Tunjukkan gambar hanya selepas dimuat naik */
 }
 
-8c5d62c (Inisialisasi repositori dengan fail sedia ada)
+#uploadedImage {
+    object-fit: contain; /* Pastikan gambar sesuai dengan nisbah frame */
+    max-width: 100%;
+    max-height: 100%;
+}
+
