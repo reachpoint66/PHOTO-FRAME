@@ -12,37 +12,29 @@ document.getElementById('imageInput').addEventListener('change', function(event)
 });
 
 document.getElementById('downloadBtn').addEventListener('click', function() {
-    const uploadedImage = document.getElementById('uploadedImage');
+    const image = document.getElementById('uploadedImage');
     const photoFrame = document.getElementById('photoFrame');
 
-    if (uploadedImage.src && photoFrame.src) {
-        // Create a canvas to combine both images
+    if (image.src) {
+        // Create a canvas to combine image and frame
         const canvas = document.createElement('canvas');
         const ctx = canvas.getContext('2d');
-        
-        // Set canvas size to match the frame
+
+        // Set canvas size equal to the frame size
         canvas.width = photoFrame.width;
         canvas.height = photoFrame.height;
-        
-        // Draw the photo frame first
+
+        // Draw the frame (make sure the frame image is loaded)
         ctx.drawImage(photoFrame, 0, 0, canvas.width, canvas.height);
 
         // Draw the uploaded image on top of the frame
-        const image = new Image();
-        image.src = uploadedImage.src;
-        image.onload = function() {
-            const imageWidth = canvas.width;
-            const imageHeight = canvas.height;
-            
-            // Resize the image to fit the frame
-            ctx.drawImage(image, 0, 0, imageWidth, imageHeight);
+        ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
 
-            // Now trigger download with the merged image
-            const link = document.createElement('a');
-            link.href = canvas.toDataURL('image/png');
-            link.download = 'downloaded_image_with_frame.png';
-            link.click();
-        };
+        // Create a downloadable link
+        const link = document.createElement('a');
+        link.href = canvas.toDataURL('image/png');
+        link.download = 'downloaded_image_with_frame.png';
+        link.click();
     } else {
         alert('No image to download');
     }
