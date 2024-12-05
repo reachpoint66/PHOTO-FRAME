@@ -1,23 +1,29 @@
 body {
-    text-align: center;
     font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
 }
 
-.frame-container {
+.container {
+    text-align: center;
+}
+
+#frame-container {
     position: relative;
-    display: inline-block;
 }
 
-.frame {
-    width: 100%;
-    height: auto;
-    position: absolute;
-    top: 0;
-    left: 0;
-}
-
-.uploaded-image {
-    width: 100%;
-    height: auto;
+#photoCanvas {
+    max-width: 100%;
+    max-height: 100%;
     display: block;
+    margin: 0 auto;
+}
+
+button {
+    padding: 10px 20px;
+    margin-top: 20px;
+    cursor: pointer;
 }
