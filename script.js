@@ -1,37 +1,24 @@
-document.getElementById('imageInput').addEventListener('change', function(event) {
-    const file = event.target.files[0];
-    if (file) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            const uploadedImage = document.getElementById('uploadedImage');
-            uploadedImage.src = e.target.result;
-            uploadedImage.style.display = 'block'; // Show the uploaded image
-        };
-        reader.readAsDataURL(file);
-    }
-});
-
 document.getElementById('downloadBtn').addEventListener('click', function() {
-    const canvas = document.getElementById('canvas');
-    const ctx = canvas.getContext('2d');
-
-    // Get the frame and uploaded image
-    const photoFrame = document.getElementById('photoFrame');
+    const frame = document.getElementById('photoFrame');
     const uploadedImage = document.getElementById('uploadedImage');
 
-    // Set canvas size to match frame
-    canvas.width = photoFrame.naturalWidth;
-    canvas.height = photoFrame.naturalHeight;
+    if (!uploadedImage.src) {
+        alert('Sila muat naik gambar dahulu.');
+        return;
+    }
 
-    // Draw the frame and uploaded image on the canvas
-    ctx.drawImage(photoFrame, 0, 0, canvas.width, canvas.height);
-    ctx.drawImage(uploadedImage, 0, 0, canvas.width, canvas.height);
+    // Gabungkan frame dan gambar
+    const canvas = document.createElement('canvas');
+    canvas.width = frame.width;
+    canvas.height = frame.height;
 
-    // Create a link to download the image
-    canvas.toBlob(function(blob) {
-        const link = document.createElement('a');
-        link.href = URL.createObjectURL(blob);
-        link.download = 'framed_image.png';
-        link.click();
-    }, 'image/png');
+    const ctx = canvas.getContext('2d');
+    ctx.drawImage(frame, 0, 0, canvas.width, canvas.height); // Lukis frame
+    ctx.drawImage(uploadedImage, 0, 0, canvas.width, canvas.height); // Lukis gambar
+
+    // Buat muat turun
+    const link = document.createElement('a');
+    link.download = 'photo_with_frame.png';
+    link.href = canvas.toDataURL('image/png');
+    link.click();
 });
