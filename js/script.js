@@ -21,20 +21,18 @@ document.getElementById('downloadBtn').addEventListener('click', function () {
         const context = canvas.getContext('2d');
 
         // Tetapkan saiz kanvas sama dengan saiz bingkai
-        canvas.width = frame.width;
-        canvas.height = frame.height;
+        canvas.width = frame.naturalWidth;
+        canvas.height = frame.naturalHeight;
 
-        // Lukis bingkai ke dalam kanvas
-        context.drawImage(frame, 0, 0, canvas.width, canvas.height);
-
-        // Tunggu hingga gambar dimuat sepenuhnya
-        uploadedImage.onload = function() {
-            // Fitkan gambar ke dalam bingkai
+        // Tunggu gambar dimuat sepenuhnya
+        uploadedImage.onload = function () {
+            // Tentukan saiz gambar untuk memastikan gambar muat dalam bingkai
             const imageAspectRatio = uploadedImage.naturalWidth / uploadedImage.naturalHeight;
             const frameAspectRatio = canvas.width / canvas.height;
 
             let drawWidth, drawHeight, offsetX, offsetY;
 
+            // Sesuaikan gambar dengan bingkai tanpa mengubah rasio aspek
             if (imageAspectRatio > frameAspectRatio) {
                 drawHeight = canvas.height;
                 drawWidth = drawHeight * imageAspectRatio;
@@ -46,6 +44,9 @@ document.getElementById('downloadBtn').addEventListener('click', function () {
                 offsetX = 0;
                 offsetY = (canvas.height - drawHeight) / 2;
             }
+
+            // Lukis bingkai ke dalam kanvas
+            context.drawImage(frame, 0, 0, canvas.width, canvas.height);
 
             // Lukis gambar yang dimuat naik ke dalam kanvas
             context.drawImage(uploadedImage, offsetX, offsetY, drawWidth, drawHeight);
