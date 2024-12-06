@@ -46,7 +46,7 @@ document.getElementById('downloadBtn').addEventListener('click', function () {
             offsetY = (canvas.height - drawHeight) / 2;
         }
 
-        // Lukis gambar ke dalam kanvas
+        // Lukis gambar ke dalam kanvas (termasuk bingkai)
         context.drawImage(uploadedImage, offsetX, offsetY, drawWidth, drawHeight);
 
         // Muat turun gambar dengan bingkai sebagai fail PNG dengan resolusi tinggi
