@@ -15,9 +15,8 @@ body {
 
 .frame {
     position: relative;
-    width: 70%;  /* Adjust to a percentage to make it responsive */
-    max-width: 500px; /* Maximum width */
-    height: auto; /* Adjust height to match the image's aspect ratio */
+    width: 300px; /* Saiz bingkai */
+    height: 400px; /* Saiz bingkai */
     background-color: #fff;
     display: flex;
     justify-content: center;
@@ -27,18 +26,18 @@ body {
 
 #photoFrame {
     position: absolute;
-    width: 100%;
-    height: 100%;
-    object-fit: contain;  /* Keep the frame ratio */
-    z-index: 1;  /* Frame stays in front */
+    width: 100%;  /* Saiz bingkai mengikut nisbah */
+    height: 100%;  /* Saiz bingkai mengikut nisbah */
+    z-index: 1;  /* Bingkai berada di depan */
 }
 
 #uploadedImage {
+    position: absolute;
     max-width: 100%;
     max-height: 100%;
-    object-fit: cover;  /* Crop the image if necessary to fit */
+    object-fit: cover;
     display: none;
-    z-index: 0;  /* Image stays behind the frame */
+    z-index: 0;  /* Gambar di belakang bingkai */
 }
 
 .upload-btn {

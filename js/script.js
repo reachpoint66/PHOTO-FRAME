@@ -6,42 +6,58 @@ document.getElementById('imageInput').addEventListener('change', function(event)
         reader.onload = function(e) {
             const uploadedImage = document.getElementById('uploadedImage');
             uploadedImage.src = e.target.result;
+
             uploadedImage.style.display = 'block';  // Paparkan gambar yang dimuat naik
+
+            // Sesuaikan gambar dengan bingkai
+            uploadedImage.onload = function() {
+                fitImageInFrame(uploadedImage);
+            };
         };
         reader.readAsDataURL(file);
     }
 });
 
-// Fungsi untuk memuat turun gambar yang telah dimuat naik bersama bingkai
+// Fungsi untuk memuat turun gambar yang telah dimuat naik
 document.getElementById('downloadBtn').addEventListener('click', function() {
-    const frame = document.getElementById('photoFrame');
     const image = document.getElementById('uploadedImage');
-
     if (image.src) {
-        // Create a canvas to combine the frame and the uploaded image
         const canvas = document.createElement('canvas');
         const ctx = canvas.getContext('2d');
 
-        // Set canvas size to match the uploaded image
-        canvas.width = image.width;
-        canvas.height = image.height;
+        // Ambil saiz bingkai dan gambar
+        const frame = document.getElementById('photoFrame');
+        const frameWidth = frame.width;
+        const frameHeight = frame.height;
 
-        // Draw the uploaded image
-        ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+        canvas.width = frameWidth;
+        canvas.height = frameHeight;
 
-        // Draw the photo frame on top
-        const frameImage = new Image();
-        frameImage.onload = function() {
-            ctx.drawImage(frameImage, 0, 0, canvas.width, canvas.height);
-            
-            // Download the image as PNG
-            const link = document.createElement('a');
-            link.href = canvas.toDataURL('image/png');
-            link.download = 'image_with_frame.png';  // Name of the downloaded file
-            link.click();
-        };
-        frameImage.src = frame.src;  // Use the frame image source
+        // Lukis bingkai dan gambar ke dalam kanvas
+        ctx.drawImage(frame, 0, 0, frameWidth, frameHeight);
+        ctx.drawImage(image, 0, 0, frameWidth, frameHeight);
+
+        // Muat turun gambar yang disertakan dengan bingkai
+        const link = document.createElement('a');
+        link.href = canvas.toDataURL('image/png');
+        link.download = 'downloaded_image_with_frame.png';  // Nama fail untuk dimuat turun
+        link.click();
     } else {
         alert('No image to download');
     }
 });
+
+// Fungsi untuk sesuaikan gambar dalam bingkai
+function fitImageInFrame(img) {
+    const frame = document.getElementById('photoFrame');
+    const frameAspectRatio = frame.width / frame.height;
+    const imageAspectRatio = img.width / img.height;
+
+    if (imageAspectRatio > frameAspectRatio) {
+        img.style.width = '100%';
+        img.style.height = 'auto';
+    } else {
+        img.style.width = 'auto';
+        img.style.height = '100%';
+    }
+}
