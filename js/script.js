@@ -5,7 +5,7 @@ document.getElementById('imageInput').addEventListener('change', function(event)
         const reader = new FileReader();
         reader.onload = function(e) {
             const uploadedImage = document.getElementById('uploadedImage');
-            uploadedImage.src = 'asset/' + e.target.result;
+            uploadedImage.src = e.target.result;
             uploadedImage.style.display = 'block';  // Paparkan gambar yang dimuat naik
         };
         reader.readAsDataURL(file);
