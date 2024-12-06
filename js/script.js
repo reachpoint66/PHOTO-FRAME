@@ -3,41 +3,42 @@ document.getElementById('downloadBtn').addEventListener('click', function () {
     const uploadedImage = document.getElementById('uploadedImage');
 
     if (uploadedImage.src) {
-        // Buat kanvas untuk menggabungkan gambar dan bingkai
+        // Tetapkan resolusi kanvas ke 1200x1200
         const canvas = document.createElement('canvas');
         const context = canvas.getContext('2d');
+        canvas.width = 1200;
+        canvas.height = 1200;
 
-        // Tetapkan saiz kanvas sama dengan saiz bingkai
-        canvas.width = frame.width;
-        canvas.height = frame.height;
-
-        // Lukis gambar ke dalam kanvas
-        context.drawImage(uploadedImage, 0, 0, canvas.width, canvas.height);
-
-        // Lukis bingkai ke dalam kanvas
+        // Lukis bingkai foto pada kanvas
         context.drawImage(frame, 0, 0, canvas.width, canvas.height);
 
-        // Muat turun gambar sebagai fail PNG
+        // Hitung skala gambar untuk muat dalam bingkai
+        const imageAspectRatio = uploadedImage.naturalWidth / uploadedImage.naturalHeight;
+        const frameAspectRatio = canvas.width / canvas.height;
+
+        let drawWidth, drawHeight, offsetX, offsetY;
+
+        if (imageAspectRatio > frameAspectRatio) {
+            drawHeight = canvas.height;
+            drawWidth = drawHeight * imageAspectRatio;
+            offsetX = (canvas.width - drawWidth) / 2;
+            offsetY = 0;
+        } else {
+            drawWidth = canvas.width;
+            drawHeight = drawWidth / imageAspectRatio;
+            offsetX = 0;
+            offsetY = (canvas.height - drawHeight) / 2;
+        }
+
+        // Lukis gambar yang dimuat naik di belakang bingkai
+        context.drawImage(uploadedImage, offsetX, offsetY, drawWidth, drawHeight);
+
+        // Muat turun gambar yang telah digabungkan
         const link = document.createElement('a');
         link.href = canvas.toDataURL('image/png', 1.0); // Resolusi tinggi
         link.download = 'photo_with_frame.png';
         link.click();
     } else {
-        alert('Please upload an image first!');
-    }
-});
-
-document.getElementById('imageInput').addEventListener('change', function (event) {
-    const file = event.target.files[0];
-    const reader = new FileReader();
-
-    reader.onload = function (e) {
-        const uploadedImage = document.getElementById('uploadedImage');
-        uploadedImage.src = e.target.result;
-        uploadedImage.style.display = 'block'; // Menunjukkan gambar yang dimuat naik
-    };
-
-    if (file) {
-        reader.readAsDataURL(file);
+        alert('Sila muat naik gambar terlebih dahulu!');
     }
 });
