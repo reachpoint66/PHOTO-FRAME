@@ -19,7 +19,7 @@ document.getElementById('downloadBtn').addEventListener('click', function () {
         const canvas = document.createElement('canvas');
         const context = canvas.getContext('2d');
 
-        // Tunggu gambar dimuat sepenuhnya sebelum memulakan penggabungan
+        // Tunggu gambar dimuat sepenuhnya
         uploadedImage.onload = function () {
             // Tentukan saiz kanvas berdasarkan saiz bingkai
             canvas.width = frame.naturalWidth;
