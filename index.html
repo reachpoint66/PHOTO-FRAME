@@ -8,10 +8,18 @@
 </head>
 <body>
     <div class="container">
+        <!-- Pilihan Bingkai -->
+        <label for="frameSelector">Select Frame:</label>
+        <select id="frameSelector" class="upload-btn">
+            <option value="assets/photo_frame.png">Default Frame</option>
+            <option value="assets/frame_1_gold.png">Gold Frame</option>
+        </select>
+
         <div class="frame">
             <img id="photoFrame" src="assets/photo_frame.png" alt="Photo Frame">
             <canvas id="uploadedCanvas"></canvas>
         </div>
+
         <input type="file" id="imageInput" class="upload-btn" accept="image/*">
         <button id="downloadBtn" class="download-btn">Download Image</button>
     </div>

@@ -40,6 +40,13 @@ document.getElementById('imageInput').addEventListener('change', function (event
     }
 });
 
+// Update photo frame based on the selected frame
+document.getElementById('frameSelector').addEventListener('change', function () {
+    const selectedFrame = this.value;
+    const frameElement = document.getElementById('photoFrame');
+    frameElement.src = selectedFrame; // Change the frame based on user selection
+});
+
 document.getElementById('downloadBtn').addEventListener('click', function () {
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');

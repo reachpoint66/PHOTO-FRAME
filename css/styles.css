@@ -63,3 +63,11 @@ body {
 .download-btn:hover {
     background-color: #007B9A;
 }
+
+select {
+    margin-top: 10px;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
