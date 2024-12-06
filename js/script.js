@@ -20,11 +20,11 @@ document.getElementById('downloadBtn').addEventListener('click', function () {
         const canvas = document.createElement('canvas');
         const context = canvas.getContext('2d');
 
-        // Tentukan saiz kanvas untuk menampung gambar dan bingkai
-        canvas.width = frame.naturalWidth;  // Lebar bingkai sebenar
-        canvas.height = frame.naturalHeight; // Ketinggian bingkai sebenar
+        // Tentukan saiz kanvas mengikut saiz sebenar bingkai
+        canvas.width = frame.naturalWidth;
+        canvas.height = frame.naturalHeight;
 
-        // Lukis bingkai ke dalam kanvas
+        // Lukis bingkai pada kanvas
         context.drawImage(frame, 0, 0, canvas.width, canvas.height);
 
         // Fitkan gambar ke dalam bingkai
@@ -33,7 +33,7 @@ document.getElementById('downloadBtn').addEventListener('click', function () {
 
         let drawWidth, drawHeight, offsetX, offsetY;
 
-        // Tentukan saiz dan kedudukan gambar supaya ia sesuai dengan bingkai
+        // Tentukan saiz gambar supaya ia sesuai dengan bingkai
         if (imageAspectRatio > frameAspectRatio) {
             drawHeight = canvas.height;
             drawWidth = drawHeight * imageAspectRatio;
@@ -46,12 +46,12 @@ document.getElementById('downloadBtn').addEventListener('click', function () {
             offsetY = (canvas.height - drawHeight) / 2;
         }
 
-        // Lukis gambar yang dimuat naik ke dalam kanvas
+        // Lukis gambar ke dalam kanvas
         context.drawImage(uploadedImage, offsetX, offsetY, drawWidth, drawHeight);
 
-        // Muat turun gambar sebagai fail PNG dengan resolusi tinggi
+        // Muat turun gambar dengan bingkai sebagai fail PNG dengan resolusi tinggi
         const link = document.createElement('a');
-        link.href = canvas.toDataURL('image/png', 1.0); // Gunakan resolusi tinggi
+        link.href = canvas.toDataURL('image/png', 1.0);  // Resolusi tinggi
         link.download = 'photo_with_frame.png';
         link.click();
     } else {
