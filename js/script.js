@@ -16,7 +16,6 @@ document.getElementById('downloadBtn').addEventListener('click', function () {
     const uploadedImage = document.getElementById('uploadedImage');
 
     if (uploadedImage.src) {
-        // Buat kanvas untuk menggabungkan gambar dan bingkai
         const canvas = document.createElement('canvas');
         const context = canvas.getContext('2d');
 
