@@ -28,14 +28,14 @@ body {
     position: absolute;
     width: 100%;
     height: 100%;
-    z-index: 1; /* Frame stays on top */
+    z-index: 0; /* Frame stays behind the image */
 }
 
 #uploadedCanvas {
     position: absolute;
     width: 100%;
     height: 100%;
-    z-index: 0; /* Canvas is behind the frame */
+    z-index: 1; /* Canvas with uploaded image stays in front */
 }
 
 .upload-btn, .download-btn {
