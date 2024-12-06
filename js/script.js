@@ -20,12 +20,12 @@ document.getElementById('downloadBtn').addEventListener('click', function () {
         const canvas = document.createElement('canvas');
         const context = canvas.getContext('2d');
 
-        // Tetapkan saiz kanvas sama dengan saiz bingkai
-        canvas.width = frame.naturalWidth;
-        canvas.height = frame.naturalHeight;
-
         // Tunggu gambar dimuat sepenuhnya sebelum memulakan penggabungan
         uploadedImage.onload = function () {
+            // Tetapkan saiz kanvas sama dengan saiz bingkai
+            canvas.width = frame.naturalWidth;
+            canvas.height = frame.naturalHeight;
+
             // Tentukan saiz gambar untuk memastikan gambar muat dalam bingkai
             const imageAspectRatio = uploadedImage.naturalWidth / uploadedImage.naturalHeight;
             const frameAspectRatio = canvas.width / canvas.height;
