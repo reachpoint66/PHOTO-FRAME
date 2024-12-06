@@ -25,18 +25,18 @@ body {
 }
 
 #photoFrame {
-    position: absolute;
+    position: absolute;  /* Positioned absolutely */
     width: 100%;
     height: 100%;
+    z-index: 2;  /* Ensure frame is in front of the image */
 }
 
 #uploadedImage {
     max-width: 100%;
     max-height: 100%;
     object-fit: cover;
-    display: none;  /* Gambar akan tersembunyi sehingga dimuat naik */
-    position: absolute; /* Pastikan gambar berada di atas frame */
-    z-index: 10; /* Pastikan gambar berada di atas frame */
+    display: none;  /* Hidden initially, shown when an image is uploaded */
+    z-index: 1;  /* Ensure image is behind the frame */
 }
 
 .upload-btn {
