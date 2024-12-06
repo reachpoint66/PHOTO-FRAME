@@ -12,15 +12,30 @@ document.getElementById('imageInput').addEventListener('change', function(event)
     }
 });
 
-// Fungsi untuk memuat turun gambar yang telah dimuat naik
+// Fungsi untuk memuat turun gambar yang telah dimuat naik bersama bingkai
 document.getElementById('downloadBtn').addEventListener('click', function() {
-    const image = document.getElementById('uploadedImage');
-    if (image.src) {
+    const uploadedImage = document.getElementById('uploadedImage');
+    const photoFrame = document.getElementById('photoFrame');
+
+    if (uploadedImage.src) {
+        // Cipta kanvas untuk menggabungkan gambar
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+
+        // Tetapkan saiz kanvas mengikut saiz bingkai
+        canvas.width = photoFrame.width;
+        canvas.height = photoFrame.height;
+
+        // Lukis bingkai dan gambar
+        ctx.drawImage(photoFrame, 0, 0, canvas.width, canvas.height);  // Lukis bingkai
+        ctx.drawImage(uploadedImage, 0, 0, canvas.width, canvas.height);  // Lukis gambar
+
+        // Muat turun gambar gabungan
         const link = document.createElement('a');
-        link.href = image.src;
+        link.href = canvas.toDataURL();  // Ambil imej dari kanvas
         link.download = 'downloaded_image.png';  // Nama fail untuk dimuat turun
         link.click();
     } else {
-        alert('No image to download');  // Jika tiada gambar, beri amaran
+        alert('No image to download');
     }
 });
