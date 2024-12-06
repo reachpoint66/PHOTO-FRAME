@@ -1,3 +1,4 @@
+// Fungsi untuk memuat naik gambar
 document.getElementById('imageInput').addEventListener('change', function (event) {
     const file = event.target.files[0];
     if (file) {
@@ -11,6 +12,7 @@ document.getElementById('imageInput').addEventListener('change', function (event
     }
 });
 
+// Fungsi untuk memuat turun gambar dengan bingkai
 document.getElementById('downloadBtn').addEventListener('click', function () {
     const frame = document.getElementById('photoFrame');
     const uploadedImage = document.getElementById('uploadedImage');
