@@ -1,3 +1,18 @@
+// Untuk memuat naik gambar dan meletakkannya pada bingkai
+document.getElementById('imageInput').addEventListener('change', function (e) {
+    const file = e.target.files[0]; // Ambil fail yang dimuat naik
+    const reader = new FileReader();
+
+    reader.onload = function (event) {
+        const uploadedImage = document.getElementById('uploadedImage');
+        uploadedImage.src = event.target.result; // Letakkan imej yang dimuat naik pada elemen gambar
+        uploadedImage.style.display = 'block'; // Tunjukkan gambar selepas dimuat naik
+    };
+
+    reader.readAsDataURL(file); // Baca fail imej
+});
+
+// Untuk butang muat turun
 document.getElementById('downloadBtn').addEventListener('click', function () {
     const frame = document.getElementById('photoFrame');
     const uploadedImage = document.getElementById('uploadedImage');
@@ -14,7 +29,7 @@ document.getElementById('downloadBtn').addEventListener('click', function () {
         // Lukis bingkai ke dalam kanvas
         context.drawImage(frame, 0, 0, canvas.width, canvas.height);
 
-        // Fitkan gambar ke dalam bingkai
+        // Sesuaikan gambar supaya muat dalam bingkai
         const imageAspectRatio = uploadedImage.naturalWidth / uploadedImage.naturalHeight;
         const frameAspectRatio = canvas.width / canvas.height;
 
@@ -42,6 +57,6 @@ document.getElementById('downloadBtn').addEventListener('click', function () {
         link.download = 'photo_with_frame.png';
         link.click();
     } else {
-        alert('Please upload an image first!');
+        alert('Sila muat naik gambar terlebih dahulu!');
     }
 });
