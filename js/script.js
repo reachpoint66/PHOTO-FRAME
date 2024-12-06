@@ -21,8 +21,8 @@ document.getElementById('downloadBtn').addEventListener('click', function () {
         const context = canvas.getContext('2d');
 
         // Tetapkan saiz kanvas sama dengan saiz bingkai
-        canvas.width = frame.width;
-        canvas.height = frame.height;
+        canvas.width = frame.naturalWidth;  // menggunakan lebar bingkai sebenar
+        canvas.height = frame.naturalHeight; // menggunakan ketinggian bingkai sebenar
 
         // Lukis bingkai ke dalam kanvas
         context.drawImage(frame, 0, 0, canvas.width, canvas.height);
@@ -48,7 +48,7 @@ document.getElementById('downloadBtn').addEventListener('click', function () {
         // Lukis gambar yang dimuat naik ke dalam kanvas
         context.drawImage(uploadedImage, offsetX, offsetY, drawWidth, drawHeight);
 
-        // Muat turun gambar sebagai fail PNG
+        // Muat turun gambar sebagai fail PNG dengan resolusi tinggi
         const link = document.createElement('a');
         link.href = canvas.toDataURL('image/png', 1.0); // Resolusi tinggi
         link.download = 'photo_with_frame.png';
