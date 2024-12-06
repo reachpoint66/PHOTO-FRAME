@@ -2,9 +2,8 @@ document.getElementById('imageInput').addEventListener('change', function (event
     const file = event.target.files[0];
     const canvas = document.getElementById('uploadedCanvas');
     const ctx = canvas.getContext('2d');
-    const frame = document.getElementById('photoFrame');
 
-    // Ensure canvas matches frame dimensions
+    // Pastikan saiz canvas sama dengan bingkai
     canvas.width = 1200;
     canvas.height = 1200;
 
@@ -13,7 +12,7 @@ document.getElementById('imageInput').addEventListener('change', function (event
         reader.onload = function (e) {
             const img = new Image();
             img.onload = function () {
-                // Fit image into canvas
+                // Fit gambar dalam canvas
                 const imageAspectRatio = img.width / img.height;
                 const canvasAspectRatio = canvas.width / canvas.height;
 
@@ -31,7 +30,7 @@ document.getElementById('imageInput').addEventListener('change', function (event
                     offsetY = (canvas.height - drawHeight) / 2;
                 }
 
-                ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear previous image
+                ctx.clearRect(0, 0, canvas.width, canvas.height); // Kosongkan canvas
                 ctx.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
             };
             img.src = e.target.result;
@@ -40,32 +39,33 @@ document.getElementById('imageInput').addEventListener('change', function (event
     }
 });
 
-// Update photo frame based on the selected frame
+// Tukar bingkai berdasarkan pilihan pengguna
 document.getElementById('frameSelector').addEventListener('change', function () {
     const selectedFrame = this.value;
     const frameElement = document.getElementById('photoFrame');
-    frameElement.src = selectedFrame; // Change the frame based on user selection
+    frameElement.src = selectedFrame; // Tukar bingkai
 });
 
+// Muat turun gambar
 document.getElementById('downloadBtn').addEventListener('click', function () {
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
     const frame = document.getElementById('photoFrame');
     const uploadedCanvas = document.getElementById('uploadedCanvas');
 
-    // Set canvas size to match frame
+    // Set saiz canvas untuk muat bingkai
     canvas.width = 1200;
     canvas.height = 1200;
 
-    // Draw frame onto new canvas
+    // Lukis bingkai ke dalam canvas baru
     const frameImg = new Image();
     frameImg.onload = function () {
-        ctx.drawImage(uploadedCanvas, 0, 0, canvas.width, canvas.height); // Draw uploaded image
-        ctx.drawImage(frameImg, 0, 0, canvas.width, canvas.height); // Draw frame
+        ctx.drawImage(uploadedCanvas, 0, 0, canvas.width, canvas.height); // Gambar dimuat naik
+        ctx.drawImage(frameImg, 0, 0, canvas.width, canvas.height); // Bingkai
 
-        // Trigger download
+        // Muat turun gambar
         const link = document.createElement('a');
-        link.href = canvas.toDataURL('image/png', 1.0); // High resolution
+        link.href = canvas.toDataURL('image/png', 1.0); // Resolusi tinggi
         link.download = 'photo_with_frame.png';
         link.click();
     };
