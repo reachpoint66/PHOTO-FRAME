@@ -9,14 +9,11 @@
 <body>
     <div class="container">
         <div class="frame">
-            <!-- Photo frame will be on top of the uploaded image -->
-            <img id="photoFrame" src="asset/photo_frame.png" alt="Photo Frame">
-            <img id="uploadedImage" src="" alt="Uploaded Image" />
+            <img id="uploadedImage" src="" alt="Uploaded Image" /> <!-- Image first -->
+            <img id="photoFrame" src="asset/photo_frame.png" alt="Photo Frame" /> <!-- Frame second -->
         </div>
 
-        <!-- Upload button to select image -->
         <input type="file" id="imageInput" class="upload-btn" accept="image/*">
-        <!-- Button to download the uploaded image -->
         <button id="downloadBtn" class="download-btn">Download Image</button>
     </div>
 
