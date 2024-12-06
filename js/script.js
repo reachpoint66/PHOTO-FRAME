@@ -20,6 +20,7 @@ document.getElementById('downloadBtn').addEventListener('click', function () {
 
         let drawWidth, drawHeight, offsetX, offsetY;
 
+        // Menyesuaikan ukuran gambar dengan bingkai
         if (imageAspectRatio > frameAspectRatio) {
             drawHeight = canvas.height;
             drawWidth = drawHeight * imageAspectRatio;
