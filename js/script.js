@@ -24,7 +24,7 @@ document.getElementById('downloadBtn').addEventListener('click', function () {
         canvas.width = frame.naturalWidth;
         canvas.height = frame.naturalHeight;
 
-        // Tunggu gambar dimuat sepenuhnya
+        // Tunggu gambar dimuat sepenuhnya sebelum memulakan penggabungan
         uploadedImage.onload = function () {
             // Tentukan saiz gambar untuk memastikan gambar muat dalam bingkai
             const imageAspectRatio = uploadedImage.naturalWidth / uploadedImage.naturalHeight;
