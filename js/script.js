@@ -20,20 +20,20 @@ document.getElementById('downloadBtn').addEventListener('click', function () {
         const canvas = document.createElement('canvas');
         const context = canvas.getContext('2d');
 
-        // Tentukan saiz kanvas mengikut saiz sebenar bingkai
-        canvas.width = frame.naturalWidth;
-        canvas.height = frame.naturalHeight;
+        // Tentukan saiz kanvas berdasarkan saiz sebenar bingkai
+        canvas.width = frame.naturalWidth;  // Lebar bingkai
+        canvas.height = frame.naturalHeight;  // Tinggi bingkai
 
-        // Lukis bingkai pada kanvas
+        // Lukis bingkai terlebih dahulu pada kanvas
         context.drawImage(frame, 0, 0, canvas.width, canvas.height);
 
-        // Fitkan gambar ke dalam bingkai
+        // Tentukan saiz dan kedudukan gambar supaya ia sesuai dengan bingkai
         const imageAspectRatio = uploadedImage.naturalWidth / uploadedImage.naturalHeight;
         const frameAspectRatio = canvas.width / canvas.height;
 
         let drawWidth, drawHeight, offsetX, offsetY;
 
-        // Tentukan saiz gambar supaya ia sesuai dengan bingkai
+        // Sesuaikan saiz gambar untuk pastikan ia masuk dalam bingkai tanpa terpotong
         if (imageAspectRatio > frameAspectRatio) {
             drawHeight = canvas.height;
             drawWidth = drawHeight * imageAspectRatio;
@@ -46,7 +46,7 @@ document.getElementById('downloadBtn').addEventListener('click', function () {
             offsetY = (canvas.height - drawHeight) / 2;
         }
 
-        // Lukis gambar ke dalam kanvas (termasuk bingkai)
+        // Lukis gambar pada kanvas, memastikan ia berada dalam bingkai
         context.drawImage(uploadedImage, offsetX, offsetY, drawWidth, drawHeight);
 
         // Muat turun gambar dengan bingkai sebagai fail PNG dengan resolusi tinggi
