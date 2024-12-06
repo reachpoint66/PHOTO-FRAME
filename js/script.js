@@ -1,16 +1,3 @@
-document.getElementById('imageInput').addEventListener('change', function (event) {
-    const file = event.target.files[0];
-    if (file) {
-        const reader = new FileReader();
-        reader.onload = function (e) {
-            const uploadedImage = document.getElementById('uploadedImage');
-            uploadedImage.src = e.target.result;
-            uploadedImage.style.display = 'block';  // Paparkan gambar yang dimuat naik
-        };
-        reader.readAsDataURL(file);
-    }
-});
-
 document.getElementById('downloadBtn').addEventListener('click', function () {
     const frame = document.getElementById('photoFrame');
     const uploadedImage = document.getElementById('uploadedImage');
@@ -20,20 +7,19 @@ document.getElementById('downloadBtn').addEventListener('click', function () {
         const canvas = document.createElement('canvas');
         const context = canvas.getContext('2d');
 
-        // Tetapkan saiz kanvas berdasarkan saiz bingkai
-        canvas.width = frame.naturalWidth;  // Lebar bingkai
-        canvas.height = frame.naturalHeight;  // Tinggi bingkai
+        // Tetapkan saiz kanvas sama dengan saiz bingkai
+        canvas.width = frame.width;
+        canvas.height = frame.height;
 
-        // Lukis bingkai pada kanvas
+        // Lukis bingkai ke dalam kanvas
         context.drawImage(frame, 0, 0, canvas.width, canvas.height);
 
-        // Sesuaikan saiz gambar supaya sesuai dalam bingkai
+        // Fitkan gambar ke dalam bingkai
         const imageAspectRatio = uploadedImage.naturalWidth / uploadedImage.naturalHeight;
         const frameAspectRatio = canvas.width / canvas.height;
 
         let drawWidth, drawHeight, offsetX, offsetY;
 
-        // Jika nisbah aspek gambar lebih besar, sesuaikan ketinggian
         if (imageAspectRatio > frameAspectRatio) {
             drawHeight = canvas.height;
             drawWidth = drawHeight * imageAspectRatio;
@@ -46,12 +32,12 @@ document.getElementById('downloadBtn').addEventListener('click', function () {
             offsetY = (canvas.height - drawHeight) / 2;
         }
 
-        // Lukis gambar pada kanvas
+        // Lukis gambar yang dimuat naik ke dalam kanvas
         context.drawImage(uploadedImage, offsetX, offsetY, drawWidth, drawHeight);
 
-        // Muat turun gambar dengan bingkai sebagai fail PNG (resolusi tinggi)
+        // Muat turun gambar sebagai fail PNG
         const link = document.createElement('a');
-        link.href = canvas.toDataURL('image/png', 1.0);  // Resolusi tinggi
+        link.href = canvas.toDataURL('image/png', 1.0); // Resolusi tinggi
         link.download = 'photo_with_frame.png';
         link.click();
     } else {
