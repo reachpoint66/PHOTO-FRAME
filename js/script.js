@@ -5,7 +5,7 @@ document.getElementById('imageInput').addEventListener('change', function (event
         reader.onload = function (e) {
             const uploadedImage = document.getElementById('uploadedImage');
             uploadedImage.src = e.target.result;
-            uploadedImage.style.display = 'block'; // Paparkan gambar yang dimuat naik
+            uploadedImage.style.display = 'block';  // Paparkan gambar yang dimuat naik
         };
         reader.readAsDataURL(file);
     }
@@ -20,9 +20,9 @@ document.getElementById('downloadBtn').addEventListener('click', function () {
         const canvas = document.createElement('canvas');
         const context = canvas.getContext('2d');
 
-        // Tetapkan saiz kanvas sama dengan saiz bingkai
-        canvas.width = frame.naturalWidth;  // menggunakan lebar bingkai sebenar
-        canvas.height = frame.naturalHeight; // menggunakan ketinggian bingkai sebenar
+        // Tentukan saiz kanvas untuk menampung gambar dan bingkai
+        canvas.width = frame.naturalWidth;  // Lebar bingkai sebenar
+        canvas.height = frame.naturalHeight; // Ketinggian bingkai sebenar
 
         // Lukis bingkai ke dalam kanvas
         context.drawImage(frame, 0, 0, canvas.width, canvas.height);
@@ -33,6 +33,7 @@ document.getElementById('downloadBtn').addEventListener('click', function () {
 
         let drawWidth, drawHeight, offsetX, offsetY;
 
+        // Tentukan saiz dan kedudukan gambar supaya ia sesuai dengan bingkai
         if (imageAspectRatio > frameAspectRatio) {
             drawHeight = canvas.height;
             drawWidth = drawHeight * imageAspectRatio;
@@ -50,7 +51,7 @@ document.getElementById('downloadBtn').addEventListener('click', function () {
 
         // Muat turun gambar sebagai fail PNG dengan resolusi tinggi
         const link = document.createElement('a');
-        link.href = canvas.toDataURL('image/png', 1.0); // Resolusi tinggi
+        link.href = canvas.toDataURL('image/png', 1.0); // Gunakan resolusi tinggi
         link.download = 'photo_with_frame.png';
         link.click();
     } else {
