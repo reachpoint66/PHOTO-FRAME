@@ -28,15 +28,15 @@ body {
     position: absolute;
     width: 100%;
     height: 100%;
-    z-index: 1; /* Bingkai berada di belakang gambar */
+    z-index: 1; /* Bingkai berada di depan */
 }
 
 #uploadedImage {
     max-width: 100%;
     max-height: 100%;
     object-fit: cover;
-    display: none; /* Gambar ini tidak muncul sehingga dimuat naik */
-    z-index: 2; /* Gambar berada di depan bingkai */
+    display: none;
+    z-index: 0; /* Gambar di belakang bingkai */
 }
 
 .upload-btn {
