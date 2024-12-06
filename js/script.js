@@ -1,43 +1,34 @@
-// Fungsi untuk mengendalikan fail gambar yang dimuat naik
-document.getElementById('imageInput').addEventListener('change', function(event) {
-    const file = event.target.files[0];
-    if (file) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            const uploadedImage = document.getElementById('uploadedImage');
-            uploadedImage.src = e.target.result;
-            uploadedImage.style.display = 'block';  // Paparkan gambar yang dimuat naik
-        };
-        reader.readAsDataURL(file);
-    }
-});
+document.getElementById('downloadBtn').addEventListener('click', function () {
+    const uploadedImage = document.getElementById('uploadedImage');
+    const photoFrame = document.getElementById('photoFrame');
 
-// Fungsi untuk memuat turun gambar yang telah dimuat naik bersama bingkai
-document.getElementById('downloadBtn').addEventListener('click', function() {
-    const image = document.getElementById('uploadedImage');
-    const frame = document.getElementById('photoFrame');
-
-    if (image.src) {
-        // Create a canvas to combine image and frame
+    if (uploadedImage.src && photoFrame.src) {
+        // Buat kanvas
         const canvas = document.createElement('canvas');
-        const ctx = canvas.getContext('2d');
+        const context = canvas.getContext('2d');
 
-        // Set canvas size to match frame size
-        canvas.width = frame.width;
-        canvas.height = frame.height;
+        // Tentukan saiz kanvas mengikut saiz bingkai
+        canvas.width = photoFrame.naturalWidth;
+        canvas.height = photoFrame.naturalHeight;
 
-        // Draw the frame first
-        ctx.drawImage(frame, 0, 0, canvas.width, canvas.height);
+        // Lukiskan bingkai ke atas kanvas
+        context.drawImage(photoFrame, 0, 0, canvas.width, canvas.height);
 
-        // Draw the uploaded image on top of the frame
-        ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+        // Fitkan gambar yang dimuat naik ke dalam bingkai
+        const scaleWidth = canvas.width * 0.8; // Saiz relatif gambar ke bingkai
+        const scaleHeight = canvas.height * 0.8;
 
-        // Create a download link for the canvas image
+        const offsetX = (canvas.width - scaleWidth) / 2;
+        const offsetY = (canvas.height - scaleHeight) / 2;
+
+        context.drawImage(uploadedImage, offsetX, offsetY, scaleWidth, scaleHeight);
+
+        // Muat turun gambar gabungan
         const link = document.createElement('a');
-        link.href = canvas.toDataURL('image/png'); // Export as PNG
-        link.download = 'photo_with_frame.png'; // Set the file name
+        link.href = canvas.toDataURL('image/png', 1.0); // Tingkatkan resolusi
+        link.download = 'framed_image.png';
         link.click();
     } else {
-        alert('No image to download');
+        alert('Please upload an image first.');
     }
 });
