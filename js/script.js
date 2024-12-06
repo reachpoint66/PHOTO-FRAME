@@ -14,27 +14,33 @@ document.getElementById('imageInput').addEventListener('change', function(event)
 
 // Fungsi untuk memuat turun gambar yang telah dimuat naik bersama bingkai
 document.getElementById('downloadBtn').addEventListener('click', function() {
-    const uploadedImage = document.getElementById('uploadedImage');
-    const photoFrame = document.getElementById('photoFrame');
+    const frame = document.getElementById('photoFrame');
+    const image = document.getElementById('uploadedImage');
 
-    if (uploadedImage.src) {
-        // Cipta kanvas untuk menggabungkan gambar
+    if (image.src) {
+        // Create a canvas to combine the frame and the uploaded image
         const canvas = document.createElement('canvas');
         const ctx = canvas.getContext('2d');
 
-        // Tetapkan saiz kanvas mengikut saiz bingkai
-        canvas.width = photoFrame.width;
-        canvas.height = photoFrame.height;
+        // Set canvas size to match the uploaded image
+        canvas.width = image.width;
+        canvas.height = image.height;
 
-        // Lukis bingkai dan gambar
-        ctx.drawImage(photoFrame, 0, 0, canvas.width, canvas.height);  // Lukis bingkai
-        ctx.drawImage(uploadedImage, 0, 0, canvas.width, canvas.height);  // Lukis gambar
+        // Draw the uploaded image
+        ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
 
-        // Muat turun gambar gabungan
-        const link = document.createElement('a');
-        link.href = canvas.toDataURL();  // Ambil imej dari kanvas
-        link.download = 'downloaded_image.png';  // Nama fail untuk dimuat turun
-        link.click();
+        // Draw the photo frame on top
+        const frameImage = new Image();
+        frameImage.onload = function() {
+            ctx.drawImage(frameImage, 0, 0, canvas.width, canvas.height);
+            
+            // Download the image as PNG
+            const link = document.createElement('a');
+            link.href = canvas.toDataURL('image/png');
+            link.download = 'image_with_frame.png';  // Name of the downloaded file
+            link.click();
+        };
+        frameImage.src = frame.src;  // Use the frame image source
     } else {
         alert('No image to download');
     }

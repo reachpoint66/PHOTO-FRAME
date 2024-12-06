@@ -4,23 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Photo Frame Upload and Download</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
     <div class="container">
         <div class="frame">
-            <!-- Bingkai gambar -->
-            <img id="photoFrame" src="asset/photo_frame.png" alt="Photo Frame">
-            <!-- Gambar yang dimuat naik -->
+            <img id="photoFrame" src="assets/photo_frame.png" alt="Photo Frame">
             <img id="uploadedImage" src="" alt="Uploaded Image" />
         </div>
 
-        <!-- Muat naik gambar -->
         <input type="file" id="imageInput" class="upload-btn" accept="image/*">
-        <!-- Muat turun gambar -->
         <button id="downloadBtn" class="download-btn">Download Image</button>
     </div>
 
-    <script src="script.js"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>
