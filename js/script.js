@@ -21,7 +21,7 @@ document.getElementById('downloadBtn').addEventListener('click', function () {
 
         // Tunggu gambar dimuat sepenuhnya sebelum memulakan penggabungan
         uploadedImage.onload = function () {
-            // Tetapkan saiz kanvas sama dengan saiz bingkai
+            // Tentukan saiz kanvas berdasarkan saiz bingkai
             canvas.width = frame.naturalWidth;
             canvas.height = frame.naturalHeight;
 
@@ -56,6 +56,8 @@ document.getElementById('downloadBtn').addEventListener('click', function () {
             link.download = 'photo_with_frame.png';
             link.click();
         };
+
+        uploadedImage.src = uploadedImage.src; // Force image reload to trigger onload
     } else {
         alert('Please upload an image first!');
     }
