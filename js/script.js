@@ -27,32 +27,35 @@ document.getElementById('downloadBtn').addEventListener('click', function () {
         // Lukis bingkai ke dalam kanvas
         context.drawImage(frame, 0, 0, canvas.width, canvas.height);
 
-        // Fitkan gambar ke dalam bingkai
-        const imageAspectRatio = uploadedImage.naturalWidth / uploadedImage.naturalHeight;
-        const frameAspectRatio = canvas.width / canvas.height;
+        // Tunggu hingga gambar dimuat sepenuhnya
+        uploadedImage.onload = function() {
+            // Fitkan gambar ke dalam bingkai
+            const imageAspectRatio = uploadedImage.naturalWidth / uploadedImage.naturalHeight;
+            const frameAspectRatio = canvas.width / canvas.height;
 
-        let drawWidth, drawHeight, offsetX, offsetY;
+            let drawWidth, drawHeight, offsetX, offsetY;
 
-        if (imageAspectRatio > frameAspectRatio) {
-            drawHeight = canvas.height;
-            drawWidth = drawHeight * imageAspectRatio;
-            offsetX = (canvas.width - drawWidth) / 2;
-            offsetY = 0;
-        } else {
-            drawWidth = canvas.width;
-            drawHeight = drawWidth / imageAspectRatio;
-            offsetX = 0;
-            offsetY = (canvas.height - drawHeight) / 2;
-        }
+            if (imageAspectRatio > frameAspectRatio) {
+                drawHeight = canvas.height;
+                drawWidth = drawHeight * imageAspectRatio;
+                offsetX = (canvas.width - drawWidth) / 2;
+                offsetY = 0;
+            } else {
+                drawWidth = canvas.width;
+                drawHeight = drawWidth / imageAspectRatio;
+                offsetX = 0;
+                offsetY = (canvas.height - drawHeight) / 2;
+            }
 
-        // Lukis gambar yang dimuat naik ke dalam kanvas
-        context.drawImage(uploadedImage, offsetX, offsetY, drawWidth, drawHeight);
+            // Lukis gambar yang dimuat naik ke dalam kanvas
+            context.drawImage(uploadedImage, offsetX, offsetY, drawWidth, drawHeight);
 
-        // Muat turun gambar sebagai fail PNG dengan resolusi yang lebih tinggi
-        const link = document.createElement('a');
-        link.href = canvas.toDataURL('image/png', 1.0); // Resolusi tinggi
-        link.download = 'photo_with_frame.png';
-        link.click();
+            // Muat turun gambar sebagai fail PNG dengan resolusi tinggi
+            const link = document.createElement('a');
+            link.href = canvas.toDataURL('image/png', 1.0); // Resolusi tinggi
+            link.download = 'photo_with_frame.png';
+            link.click();
+        };
     } else {
         alert('Please upload an image first!');
     }
