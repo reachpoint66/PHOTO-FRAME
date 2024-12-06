@@ -1,4 +1,3 @@
-// Fungsi untuk memuat naik gambar
 document.getElementById('imageInput').addEventListener('change', function (event) {
     const file = event.target.files[0];
     if (file) {
@@ -12,7 +11,6 @@ document.getElementById('imageInput').addEventListener('change', function (event
     }
 });
 
-// Fungsi untuk memuat turun gambar dengan bingkai
 document.getElementById('downloadBtn').addEventListener('click', function () {
     const frame = document.getElementById('photoFrame');
     const uploadedImage = document.getElementById('uploadedImage');
@@ -50,7 +48,7 @@ document.getElementById('downloadBtn').addEventListener('click', function () {
         // Lukis gambar yang dimuat naik ke dalam kanvas
         context.drawImage(uploadedImage, offsetX, offsetY, drawWidth, drawHeight);
 
-        // Muat turun gambar sebagai fail PNG
+        // Muat turun gambar sebagai fail PNG dengan resolusi yang lebih tinggi
         const link = document.createElement('a');
         link.href = canvas.toDataURL('image/png', 1.0); // Resolusi tinggi
         link.download = 'photo_with_frame.png';
