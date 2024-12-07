@@ -15,8 +15,8 @@ body {
 
 .frame {
     position: relative;
-    width: 900px;
-    height: 900px;
+    width: 1080px;
+    height: 1080px;
     background-color: #fff;
     display: flex;
     justify-content: center;
@@ -72,3 +72,16 @@ select {
     border: 1px solid #ccc;
 }
 
+/* Media queries for responsiveness */
+@media only screen and (max-width: 600px) {
+    .frame {
+        width: 100%;
+        height: auto;
+        max-width: 90%;
+    }
+
+    #photoFrame, #uploadedCanvas {
+        width: 100%;
+        height: auto;
+    }
+}
