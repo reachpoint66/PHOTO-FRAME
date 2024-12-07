@@ -16,8 +16,8 @@ body {
 .frame {
     position: relative;
     width: 100%;
-    max-width: 1080px; /* Menghadkan saiz maksimum kepada 1080px */
-    height: auto; /* Menyesuaikan ketinggian mengikut lebar */
+    max-width: 1080px; /* Set the maximum width to 1080px */
+    height: auto; /* Maintain aspect ratio */
     background-color: #fff;
     display: flex;
     justify-content: center;
@@ -76,10 +76,12 @@ select {
 /* Media queries untuk skrin kecil (contohnya, telefon bimbit) */
 @media (max-width: 768px) {
     .frame {
-        max-width: 90%; /* Mengurangkan lebar bingkai untuk peranti kecil */
+        max-width: 100%; /* Let the frame take up all available width on smaller screens */
+        height: auto; /* Adjust height automatically */
     }
+    
     .upload-btn, .download-btn {
-        font-size: 14px; /* Mengurangkan saiz teks butang untuk skrin kecil */
+        font-size: 14px;
         padding: 8px 16px;
     }
 }
