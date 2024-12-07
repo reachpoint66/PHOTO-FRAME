@@ -55,7 +55,10 @@ document.getElementById('downloadBtn').addEventListener('click', function () {
 
     const frameImg = new Image();
     frameImg.onload = function () {
+        // Draw the uploaded image first
         ctx.drawImage(uploadedCanvas, 0, 0, canvas.width, canvas.height);
+
+        // Draw the frame image over the uploaded image
         ctx.drawImage(frameImg, 0, 0, canvas.width, canvas.height);
 
         const link = document.createElement('a');
