@@ -11,7 +11,7 @@ body {
     align-items: center;
     flex-direction: column;
     padding: 20px;
-    height: 100vh; /* Membuatkan container mengambil ketinggian penuh skrin */
+    height: 100vh;
     box-sizing: border-box;
 }
 
@@ -20,7 +20,7 @@ body {
     width: 100%;
     max-width: 1080px;
     height: auto;
-    max-height: 90vh;  /* Mengurangkan ketinggian supaya tidak terpotong */
+    max-height: 90vh;
     background-color: #fff;
     display: flex;
     justify-content: center;
@@ -83,9 +83,9 @@ select {
         width: 90%;
         height: auto;
         max-width: 90%;
-        max-height: 90vh; /* Mengurangkan ketinggian skrin untuk peranti kecil */
+        max-height: 90vh;
         margin-top: auto;
-        margin-bottom: auto; /* Menambahkan margin untuk penyusunan lebih baik */
+        margin-bottom: auto;
     }
 
     #photoFrame, #uploadedCanvas {
@@ -99,7 +99,7 @@ select {
         width: 90%;
         height: auto;
         max-width: 100%;
-        max-height: 75vh; /* Mengurangkan ketinggian untuk peranti yang lebih kecil */
+        max-height: 75vh;
         margin-top: auto;
         margin-bottom: auto;
     }
