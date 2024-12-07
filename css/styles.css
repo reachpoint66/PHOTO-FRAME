@@ -16,13 +16,14 @@ body {
 .frame {
     position: relative;
     width: 100%;
-    max-width: 1080px; /* Set the maximum width to 1080px */
-    height: auto; /* Maintain aspect ratio */
+    max-width: 1080px; /* Set maximum width to 1080px */
+    height: auto;
     background-color: #fff;
     display: flex;
     justify-content: center;
     align-items: center;
     border: 2px solid #000;
+    overflow: hidden;  /* Ensure content stays within the bounds */
 }
 
 #photoFrame {
@@ -30,6 +31,7 @@ body {
     width: 100%;
     height: 100%;
     z-index: 1;
+    object-fit: contain;  /* Prevent distortion */
 }
 
 #uploadedCanvas {
@@ -37,6 +39,7 @@ body {
     width: 100%;
     height: 100%;
     z-index: 0;
+    object-fit: contain;  /* Prevent distortion */
 }
 
 .upload-btn, .download-btn {
@@ -73,13 +76,12 @@ select {
     border: 1px solid #ccc;
 }
 
-/* Media queries untuk skrin kecil (contohnya, telefon bimbit) */
+/* Media queries untuk telefon atau skrin kecil */
 @media (max-width: 768px) {
     .frame {
-        max-width: 100%; /* Let the frame take up all available width on smaller screens */
-        height: auto; /* Adjust height automatically */
+        max-width: 100%; /* Allow the frame to take up all available width */
     }
-    
+
     .upload-btn, .download-btn {
         font-size: 14px;
         padding: 8px 16px;
