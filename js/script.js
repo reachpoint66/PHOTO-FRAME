@@ -3,8 +3,9 @@ document.getElementById('imageInput').addEventListener('change', function (event
     const canvas = document.getElementById('uploadedCanvas');
     const ctx = canvas.getContext('2d');
 
-    canvas.width = 1200;
-    canvas.height = 1200;
+    // Ubah dimensi canvas
+    canvas.width = 1080;
+    canvas.height = 1080;
 
     if (file) {
         const reader = new FileReader();
@@ -48,8 +49,9 @@ document.getElementById('downloadBtn').addEventListener('click', function () {
     const frame = document.getElementById('photoFrame');
     const uploadedCanvas = document.getElementById('uploadedCanvas');
 
-    canvas.width = 1200;
-    canvas.height = 1200;
+    // Ubah dimensi canvas
+    canvas.width = 1080;
+    canvas.height = 1080;
 
     const frameImg = new Image();
     frameImg.onload = function () {
