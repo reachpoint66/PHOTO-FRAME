@@ -11,18 +11,22 @@ body {
     align-items: center;
     flex-direction: column;
     padding: 20px;
+    height: 100vh; /* Membuatkan container mengambil ketinggian penuh skrin */
+    box-sizing: border-box;
 }
 
 .frame {
     position: relative;
-    width: 1080px; /* Tetap pada saiz 1080x1080 untuk desktop */
-    height: 1080px;
+    width: 100%;
+    max-width: 1080px;
+    height: auto;
+    max-height: 90vh;  /* Mengurangkan ketinggian supaya tidak terpotong */
     background-color: #fff;
     display: flex;
     justify-content: center;
     align-items: center;
     border: 2px solid #000;
-    margin: auto;
+    margin: 0 auto;
 }
 
 #photoFrame {
@@ -74,12 +78,14 @@ select {
 }
 
 /* Media queries for responsiveness */
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 768px) {
     .frame {
         width: 90%;
         height: auto;
-        max-width: 100%;
-        max-height: 90vh; /* Boleh sesuaikan saiz max-height untuk skrin kecil */
+        max-width: 90%;
+        max-height: 90vh; /* Mengurangkan ketinggian skrin untuk peranti kecil */
+        margin-top: auto;
+        margin-bottom: auto; /* Menambahkan margin untuk penyusunan lebih baik */
     }
 
     #photoFrame, #uploadedCanvas {
@@ -92,6 +98,10 @@ select {
     .frame {
         width: 90%;
         height: auto;
+        max-width: 100%;
+        max-height: 75vh; /* Mengurangkan ketinggian untuk peranti yang lebih kecil */
+        margin-top: auto;
+        margin-bottom: auto;
     }
 
     #photoFrame, #uploadedCanvas {
