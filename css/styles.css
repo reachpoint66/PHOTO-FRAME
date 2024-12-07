@@ -15,10 +15,9 @@ body {
 
 .frame {
     position: relative;
-    width: 100%; /* Gunakan 100% lebar skrin */
-    max-width: 90vw; /* Maksimum 90% daripada lebar viewport */
-    max-height: 90vh; /* Maksimum 90% daripada tinggi viewport */
-    aspect-ratio: 1 / 1; /* Kekalkan nisbah segi empat sama */
+    width: 100%; /* Responsif terhadap skrin */
+    max-width: 1080px; /* Tetapkan lebar maksimum */
+    height: auto; /* Tinggi automatik mengikut nisbah */
     background-color: #fff;
     display: flex;
     justify-content: center;
@@ -26,12 +25,19 @@ body {
     border: 2px solid #000;
 }
 
-#photoFrame, #uploadedCanvas {
+#photoFrame {
     position: absolute;
     width: 100%;
-    height: 100%;
-    object-fit: contain; /* Kekalkan nisbah */
+    height: auto; /* Pastikan nisbah kekal */
+    max-height: 100%;
     z-index: 1;
+}
+
+#uploadedCanvas {
+    position: absolute;
+    width: 100%;
+    height: auto; /* Tinggi automatik */
+    z-index: 0;
 }
 
 .upload-btn, .download-btn {
@@ -66,4 +72,10 @@ select {
     font-size: 16px;
     border-radius: 5px;
     border: 1px solid #ccc;
+}
+
+@media (max-width: 768px) {
+    .frame {
+        max-width: 90%; /* Lebar maksima 90% untuk telefon bimbit */
+    }
 }

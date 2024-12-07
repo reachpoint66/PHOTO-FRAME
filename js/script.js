@@ -3,16 +3,18 @@ document.getElementById('imageInput').addEventListener('change', function (event
     const canvas = document.getElementById('uploadedCanvas');
     const ctx = canvas.getContext('2d');
 
-    // Tetapkan dimensi canvas berdasarkan viewport
-    const frameElement = document.querySelector('.frame');
-    canvas.width = frameElement.offsetWidth; 
-    canvas.height = frameElement.offsetHeight;
-
     if (file) {
         const reader = new FileReader();
         reader.onload = function (e) {
             const img = new Image();
             img.onload = function () {
+                const frame = document.querySelector('.frame');
+                const frameWidth = frame.offsetWidth; // Saiz lebar frame semasa
+                const frameHeight = frame.offsetHeight; // Saiz tinggi frame semasa
+
+                canvas.width = frameWidth;
+                canvas.height = frameHeight;
+
                 const imageAspectRatio = img.width / img.height;
                 const canvasAspectRatio = canvas.width / canvas.height;
                 let drawWidth, drawHeight, offsetX, offsetY;
@@ -50,9 +52,12 @@ document.getElementById('downloadBtn').addEventListener('click', function () {
     const frame = document.getElementById('photoFrame');
     const uploadedCanvas = document.getElementById('uploadedCanvas');
 
-    // Ambil dimensi bingkai semasa
-    canvas.width = uploadedCanvas.width;
-    canvas.height = uploadedCanvas.height;
+    const frameElement = document.querySelector('.frame');
+    const frameWidth = frameElement.offsetWidth;
+    const frameHeight = frameElement.offsetHeight;
+
+    canvas.width = frameWidth;
+    canvas.height = frameHeight;
 
     const frameImg = new Image();
     frameImg.onload = function () {
@@ -66,3 +71,18 @@ document.getElementById('downloadBtn').addEventListener('click', function () {
     };
     frameImg.src = frame.src;
 });
+
+// Pastikan canvas disesuaikan dengan bingkai pada resize skrin
+window.addEventListener('resize', function () {
+    const frame = document.querySelector('.frame');
+    const canvas = document.getElementById('uploadedCanvas');
+
+    const frameWidth = frame.offsetWidth;
+    const frameHeight = frame.offsetHeight;
+
+    canvas.width = frameWidth;
+    canvas.height = frameHeight;
+});
+
+// Panggil fungsi resize semasa laman dimuat
+window.dispatchEvent(new Event('resize'));
