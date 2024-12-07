@@ -1,3 +1,4 @@
+/* Gaya asas */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -13,31 +14,36 @@ body {
     padding: 20px;
 }
 
+/* Bingkai */
 .frame {
     position: relative;
-    width: 1080px;
-    height: 1080px;
+    width: 600px;
+    height: 600px;
     background-color: #fff;
     display: flex;
     justify-content: center;
     align-items: center;
     border: 2px solid #000;
+    margin-top: 20px;
 }
 
-#photoFrame {
+#photoFrame,
+#previewFrame {
     position: absolute;
     width: 100%;
     height: 100%;
     z-index: 1;
 }
 
-#uploadedCanvas {
+#uploadedCanvas,
+#previewCanvas {
     position: absolute;
     width: 100%;
     height: 100%;
     z-index: 0;
 }
 
+/* Butang */
 .upload-btn, .download-btn {
     margin-top: 20px;
     padding: 10px 20px;
@@ -64,10 +70,39 @@ body {
     background-color: #007B9A;
 }
 
+/* Pratonton */
+#previewContainer {
+    margin-top: 20px;
+    text-align: center;
+}
+
 select {
     margin-top: 10px;
     padding: 10px;
     font-size: 16px;
     border-radius: 5px;
     border: 1px solid #ccc;
+}
+
+/* Responsiveness */
+@media screen and (min-width: 768px) {
+    .frame {
+        width: 600px;
+        height: 600px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .frame {
+        width: 90vw;
+        height: 90vw;
+    }
+
+    .upload-btn,
+    .download-btn,
+    select {
+        width: 100%;
+        padding: 12px;
+        font-size: 14px;
+    }
 }
