@@ -3,9 +3,9 @@ document.getElementById('imageInput').addEventListener('change', function (event
     const canvas = document.getElementById('uploadedCanvas');
     const ctx = canvas.getContext('2d');
 
-    // Menetapkan saiz canvas kepada 1080x1080 untuk kualiti gambar yang lebih baik
-    canvas.width = 1080;  // Menetapkan lebar canvas kepada 1080px
-    canvas.height = 1080;  // Menetapkan tinggi canvas kepada 1080px
+    // Set canvas size to 1080x1080 for higher quality
+    canvas.width = 1080;  // Width of the canvas
+    canvas.height = 1080; // Height of the canvas
 
     if (file) {
         const reader = new FileReader();
@@ -37,15 +37,21 @@ document.getElementById('imageInput').addEventListener('change', function (event
     }
 });
 
+document.getElementById('frameSelector').addEventListener('change', function () {
+    const selectedFrame = this.value;
+    const frameElement = document.getElementById('photoFrame');
+    frameElement.src = selectedFrame;
+});
+
 document.getElementById('downloadBtn').addEventListener('click', function () {
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
     const frame = document.getElementById('photoFrame');
     const uploadedCanvas = document.getElementById('uploadedCanvas');
 
-    // Menetapkan saiz canvas kepada 1080x1080 untuk kualiti gambar yang lebih baik
-    canvas.width = 1080;  // Menetapkan lebar canvas kepada 1080px
-    canvas.height = 1080;  // Menetapkan tinggi canvas kepada 1080px
+    // Set canvas size to 1080x1080 for the downloaded image
+    canvas.width = 1080;  // Width of the final download canvas
+    canvas.height = 1080; // Height of the final download canvas
 
     const frameImg = new Image();
     frameImg.onload = function () {
@@ -53,7 +59,7 @@ document.getElementById('downloadBtn').addEventListener('click', function () {
         ctx.drawImage(frameImg, 0, 0, canvas.width, canvas.height);
 
         const link = document.createElement('a');
-        link.href = canvas.toDataURL('image/png', 1.0);  // Kualiti terbaik
+        link.href = canvas.toDataURL('image/png', 1.0);  // Best quality image
         link.download = 'photo_with_frame.png';
         link.click();
     };
