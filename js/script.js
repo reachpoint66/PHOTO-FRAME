@@ -3,9 +3,9 @@ document.getElementById('imageInput').addEventListener('change', function (event
     const canvas = document.getElementById('uploadedCanvas');
     const ctx = canvas.getContext('2d');
 
-    // Set canvas size to 1080x1080
-    canvas.width = 1080;
-    canvas.height = 1080;
+    // Mengubah saiz canvas untuk saiz skrin yang lebih kecil secara automatik
+    canvas.width = window.innerWidth * 0.9;  // Menggunakan 90% daripada lebar skrin
+    canvas.height = canvas.width;  // Menjaga nisbah lebar dan tinggi tetap (segi empat sama)
 
     if (file) {
         const reader = new FileReader();
@@ -49,9 +49,9 @@ document.getElementById('downloadBtn').addEventListener('click', function () {
     const frame = document.getElementById('photoFrame');
     const uploadedCanvas = document.getElementById('uploadedCanvas');
 
-    // Set canvas size to 1080x1080 for download image
-    canvas.width = 1080;
-    canvas.height = 1080;
+    // Mengubah saiz canvas untuk saiz skrin yang lebih kecil secara automatik
+    canvas.width = window.innerWidth * 0.9;  // Menggunakan 90% daripada lebar skrin
+    canvas.height = canvas.width;  // Menjaga nisbah lebar dan tinggi tetap (segi empat sama)
 
     const frameImg = new Image();
     frameImg.onload = function () {
