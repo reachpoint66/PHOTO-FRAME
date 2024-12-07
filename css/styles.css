@@ -15,9 +15,10 @@ body {
 
 .frame {
     position: relative;
-    width: 90%; /* Responsif - 90% daripada skrin */
-    max-width: 1080px; /* Maksimum saiz bingkai */
-    aspect-ratio: 1 / 1; /* Kekalkan nisbah 1:1 */
+    width: 100%; /* Gunakan 100% lebar skrin */
+    max-width: 90vw; /* Maksimum 90% daripada lebar viewport */
+    max-height: 90vh; /* Maksimum 90% daripada tinggi viewport */
+    aspect-ratio: 1 / 1; /* Kekalkan nisbah segi empat sama */
     background-color: #fff;
     display: flex;
     justify-content: center;
@@ -25,20 +26,12 @@ body {
     border: 2px solid #000;
 }
 
-#photoFrame {
+#photoFrame, #uploadedCanvas {
     position: absolute;
     width: 100%;
     height: 100%;
-    object-fit: contain; /* Bingkai menyesuaikan skrin */
+    object-fit: contain; /* Kekalkan nisbah */
     z-index: 1;
-}
-
-#uploadedCanvas {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    object-fit: contain; /* Gambar menyesuaikan bingkai */
-    z-index: 0;
 }
 
 .upload-btn, .download-btn {
@@ -73,12 +66,4 @@ select {
     font-size: 16px;
     border-radius: 5px;
     border: 1px solid #ccc;
-}
-
-/* Media Query untuk skrin kecil */
-@media (max-width: 768px) {
-    .frame {
-        width: 100%; /* Bingkai penuh untuk skrin kecil */
-        max-width: 90vw;
-    }
 }

@@ -3,9 +3,10 @@ document.getElementById('imageInput').addEventListener('change', function (event
     const canvas = document.getElementById('uploadedCanvas');
     const ctx = canvas.getContext('2d');
 
-    // Ubah dimensi canvas
-    canvas.width = 1080;
-    canvas.height = 1080;
+    // Tetapkan dimensi canvas berdasarkan viewport
+    const frameElement = document.querySelector('.frame');
+    canvas.width = frameElement.offsetWidth; 
+    canvas.height = frameElement.offsetHeight;
 
     if (file) {
         const reader = new FileReader();
@@ -49,9 +50,9 @@ document.getElementById('downloadBtn').addEventListener('click', function () {
     const frame = document.getElementById('photoFrame');
     const uploadedCanvas = document.getElementById('uploadedCanvas');
 
-    // Ubah dimensi canvas
-    canvas.width = 1080;
-    canvas.height = 1080;
+    // Ambil dimensi bingkai semasa
+    canvas.width = uploadedCanvas.width;
+    canvas.height = uploadedCanvas.height;
 
     const frameImg = new Image();
     frameImg.onload = function () {
