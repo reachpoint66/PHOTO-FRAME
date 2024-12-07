@@ -3,9 +3,9 @@ document.getElementById('imageInput').addEventListener('change', function (event
     const canvas = document.getElementById('uploadedCanvas');
     const ctx = canvas.getContext('2d');
 
-    // Adjust canvas size for better display
-    canvas.width = window.innerWidth * 0.9;
-    canvas.height = canvas.width;
+    // Mengubah saiz canvas untuk saiz skrin yang lebih kecil secara automatik
+    canvas.width = window.innerWidth * 0.9;  // Menggunakan 90% daripada lebar skrin
+    canvas.height = canvas.width;  // Menjaga nisbah lebar dan tinggi tetap (segi empat sama)
 
     if (file) {
         const reader = new FileReader();
@@ -49,9 +49,9 @@ document.getElementById('downloadBtn').addEventListener('click', function () {
     const frame = document.getElementById('photoFrame');
     const uploadedCanvas = document.getElementById('uploadedCanvas');
 
-    // Use higher resolution for the downloaded image
-    canvas.width = uploadedCanvas.width;
-    canvas.height = uploadedCanvas.height;
+    // Mengubah saiz canvas untuk saiz skrin yang lebih kecil secara automatik
+    canvas.width = window.innerWidth * 0.9;  // Menggunakan 90% daripada lebar skrin
+    canvas.height = canvas.width;  // Menjaga nisbah lebar dan tinggi tetap (segi empat sama)
 
     const frameImg = new Image();
     frameImg.onload = function () {
@@ -59,7 +59,7 @@ document.getElementById('downloadBtn').addEventListener('click', function () {
         ctx.drawImage(frameImg, 0, 0, canvas.width, canvas.height);
 
         const link = document.createElement('a');
-        link.href = canvas.toDataURL('image/png', 1.0); // Set quality to 1.0 for higher quality
+        link.href = canvas.toDataURL('image/png', 1.0);  // Kualiti terbaik
         link.download = 'photo_with_frame.png';
         link.click();
     };
