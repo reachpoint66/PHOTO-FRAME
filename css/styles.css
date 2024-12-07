@@ -15,9 +15,8 @@ body {
 
 .frame {
     position: relative;
-    width: 100%; /* Responsif terhadap skrin */
-    max-width: 1080px; /* Tetapkan lebar maksimum */
-    height: auto; /* Tinggi automatik mengikut nisbah */
+    width: 900px;
+    height: 900px;
     background-color: #fff;
     display: flex;
     justify-content: center;
@@ -28,15 +27,14 @@ body {
 #photoFrame {
     position: absolute;
     width: 100%;
-    height: auto; /* Pastikan nisbah kekal */
-    max-height: 100%;
+    height: 100%;
     z-index: 1;
 }
 
 #uploadedCanvas {
     position: absolute;
     width: 100%;
-    height: auto; /* Tinggi automatik */
+    height: 100%;
     z-index: 0;
 }
 
@@ -74,8 +72,3 @@ select {
     border: 1px solid #ccc;
 }
 
-@media (max-width: 768px) {
-    .frame {
-        max-width: 90%; /* Lebar maksima 90% untuk telefon bimbit */
-    }
-}
