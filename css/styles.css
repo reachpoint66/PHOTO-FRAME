@@ -15,13 +15,14 @@ body {
 
 .frame {
     position: relative;
-    width: 1080px;
+    width: 1080px; /* Tetap pada saiz 1080x1080 untuk desktop */
     height: 1080px;
     background-color: #fff;
     display: flex;
     justify-content: center;
     align-items: center;
     border: 2px solid #000;
+    margin: auto;
 }
 
 #photoFrame {
@@ -75,9 +76,22 @@ select {
 /* Media queries for responsiveness */
 @media only screen and (max-width: 600px) {
     .frame {
+        width: 90%;
+        height: auto;
+        max-width: 100%;
+        max-height: 90vh; /* Boleh sesuaikan saiz max-height untuk skrin kecil */
+    }
+
+    #photoFrame, #uploadedCanvas {
         width: 100%;
         height: auto;
-        max-width: 90%;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .frame {
+        width: 90%;
+        height: auto;
     }
 
     #photoFrame, #uploadedCanvas {
